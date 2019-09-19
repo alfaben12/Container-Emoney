@@ -51,13 +51,13 @@ public class PaymentGatewayAdapter extends RecyclerView.Adapter<PaymentGatewayAd
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        holder.txtName.setText(dataList.get(position).getName());
+        holder.txtName.setText(dataList.get(position).getPaymentGatewayName());
 
         Picasso.Builder builder = new Picasso.Builder(context);
         builder.downloader(new OkHttp3Downloader(context));
         builder.build().load(dataList.get(position).getImage())
-                .placeholder((R.drawable.ic_launcher_background))
-                .error(R.drawable.ic_launcher_background)
+                .placeholder((R.drawable.ic_card_loader))
+                .error(R.drawable.ic_card_loader)
                 .into(holder.imgLogo);
     }
 
