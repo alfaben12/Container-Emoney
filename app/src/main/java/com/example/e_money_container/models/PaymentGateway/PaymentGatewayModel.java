@@ -1,17 +1,18 @@
-
 package com.example.e_money_container.models.PaymentGateway;
 
+
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PaymentGateway {
+public class PaymentGatewayModel {
 
     @SerializedName("result")
     @Expose
     private Boolean result;
     @SerializedName("data")
     @Expose
-    private Data data;
+    private List<Datum> data = null;
 
     public Boolean getResult() {
         return result;
@@ -21,11 +22,11 @@ public class PaymentGateway {
         this.result = result;
     }
 
-    public Data getData() {
+    public List<Datum> getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(List<Datum> data) {
         this.data = data;
     }
 

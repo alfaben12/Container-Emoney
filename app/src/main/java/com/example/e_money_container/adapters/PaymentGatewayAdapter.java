@@ -30,29 +30,27 @@ public class PaymentGatewayAdapter extends RecyclerView.Adapter<PaymentGatewayAd
 
         public final View mView;
 
-        private TextView txtPrice, txtName;
-        private ImageView imageProduct;
+        private TextView txtName;
+        private ImageView imgLogo;
 
         CustomViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
 
-            txtPrice = mView.findViewById(R.id.txtPrice);
             txtName = mView.findViewById(R.id.txtName);
-            imageProduct = mView.findViewById(R.id.imageProduct);
+            imgLogo = mView.findViewById(R.id.imgLogo);
         }
     }
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.item_shop, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_gateways, parent, false);
         return new CustomViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        holder.txtPrice.setText("Rp. "+ dataList.get(position).getPrice());
         holder.txtName.setText(dataList.get(position).getName());
 
         Picasso.Builder builder = new Picasso.Builder(context);
@@ -60,11 +58,12 @@ public class PaymentGatewayAdapter extends RecyclerView.Adapter<PaymentGatewayAd
         builder.build().load(dataList.get(position).getImage())
                 .placeholder((R.drawable.ic_launcher_background))
                 .error(R.drawable.ic_launcher_background)
-                .into(holder.imageProduct);
+                .into(holder.imgLogo);
     }
 
     @Override
     public int getItemCount() {
         return dataList.size();
     }
+}
 

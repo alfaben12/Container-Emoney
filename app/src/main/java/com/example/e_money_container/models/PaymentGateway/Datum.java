@@ -1,4 +1,3 @@
-
 package com.example.e_money_container.models.PaymentGateway;
 
 import com.google.gson.annotations.Expose;
@@ -8,7 +7,10 @@ public class Datum {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private String id;
+    @SerializedName("payment_gateway_typeid")
+    @Expose
+    private String paymentGatewayTypeid;
     @SerializedName("name")
     @Expose
     private String name;
@@ -20,20 +22,31 @@ public class Datum {
     private String apiKey;
     @SerializedName("balance")
     @Expose
-    private Integer balance;
+    private String balance;
     @SerializedName("createdAt")
     @Expose
     private String createdAt;
     @SerializedName("updatedAt")
     @Expose
-    private Object updatedAt;
+    private String updatedAt;
+    @SerializedName("image")
+    @Expose
+    private String image;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPaymentGatewayTypeid() {
+        return paymentGatewayTypeid;
+    }
+
+    public void setPaymentGatewayTypeid(String paymentGatewayTypeid) {
+        this.paymentGatewayTypeid = paymentGatewayTypeid;
     }
 
     public String getName() {
@@ -60,11 +73,11 @@ public class Datum {
         this.apiKey = apiKey;
     }
 
-    public Integer getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
     }
 
@@ -76,12 +89,20 @@ public class Datum {
         this.createdAt = createdAt;
     }
 
-    public Object getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Object updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }

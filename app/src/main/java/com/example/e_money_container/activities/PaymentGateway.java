@@ -1,56 +1,50 @@
 package com.example.e_money_container.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.e_money_container.R;
+import com.example.e_money_container.adapters.PaymentGatewayAdapter;
 import com.example.e_money_container.models.PaymentGateway.Datum;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.e_money_container.models.PaymentGateway.PaymentGatewayModel;
+import com.example.e_money_container.request.PaymentGatewayRequest;
+import com.example.e_money_container.retrofit.PhpApiClient;
 
 import java.util.List;
 
+import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PaymentGateway extends AppCompatActivity {
 
-    private ShopAdapter adapter;
+    private PaymentGatewayAdapter adapter;
     private RecyclerView recyclerView;
-    ProgressDialog progressDoalog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_gateway);
 
-        /* INIT PROGRESS LOADER */
-        progressDoalog = new ProgressDialog(this);
-        progressDoalog.setMessage("Loading....");
-        progressDoalog.show();
         /* END PROGRESS LOADER */
 
         /*Create handle for the RetrofitInstance interface*/
-        ShopRequest service = ApiClient.getRetrofitInstance().create(ShopRequest.class);
-        Call<ProductModel> call = service.products();
-        call.enqueue(new Callback<ProductModel>() {
+        PaymentGatewayRequest service = PhpApiClient.getRetrofitInstance().create(PaymentGatewayRequest.class);
+        Call<PaymentGatewayModel> call = service.getPaymentGateways();
+        call.enqueue(new Callback<PaymentGatewayModel>() {
             @Override
-            public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
-                Toast.makeText(Shops.this, "Success...", Toast.LENGTH_SHORT).show();
-                generateDataList(response.body().getData().getDatas());
-                progressDoalog.dismiss();
+            public void onResponse(Call<PaymentGatewayModel> call, Response<PaymentGatewayModel> response) {
+                Toast.makeText(PaymentGateway.this, "Success...", Toast.LENGTH_SHORT).show();
+                generateDataList(response.body().getData());
             }
 
             @Override
-            public void onFailure(Call<ProductModel> call, Throwable t) {
-                Toast.makeText(Shops.this, ""+ t, Toast.LENGTH_SHORT).show();
-                progressDoalog.dismiss();
+            public void onFailure(Call<PaymentGatewayModel> call, Throwable t) {
+                Toast.makeText(PaymentGateway.this, ""+ t, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -58,11 +52,11 @@ public class PaymentGateway extends AppCompatActivity {
     /*Method to generate List of data using RecyclerView with custom adapter*/
     private void generateDataList(List<Datum> dataList) {
         recyclerView = (RecyclerView) findViewById(R.id.customRecyclerView);
-        adapter = new ShopAdapter(Shops.this, dataList);
+        adapter = new PaymentGatewayAdapter(PaymentGateway.this, dataList);
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 3);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 4);
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setLayoutManager(layoutManager);
