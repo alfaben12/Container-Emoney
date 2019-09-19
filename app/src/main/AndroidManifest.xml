@@ -14,17 +14,22 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.Questions"></activity>
         <activity android:name=".activities.PaymentGateway">
+
+        </activity>
+        <activity android:name=".activities.Registers" />
+        <activity android:name=".activities.Logins"></activity>
+        <activity android:name=".activities.ScreenSplash" />
+        <activity android:name=".activities.Dashboards" />
+        <activity android:name=".activities.MainActivity">
+
+        </activity>
+        <activity android:name=".activities.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.Registers" />
-        <activity android:name=".activities.Logins"></activity>
-        <activity android:name=".activities.ScreenSplash" />
-        <activity android:name=".activities.Dashboards" />
-        <activity android:name=".activities.MainActivity" />
     </application>
 
 </manifest>
