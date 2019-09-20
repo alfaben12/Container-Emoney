@@ -12,17 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.Questions"></activity>
-        <activity android:name=".activities.PaymentGateway">
-
-        </activity>
+        <activity android:name=".activities.ConfirmPayment"></activity>
+        <activity android:name=".activities.Questions" />
+        <activity android:name=".activities.PaymentGateway"></activity>
         <activity android:name=".activities.Registers" />
-        <activity android:name=".activities.Logins"></activity>
+        <activity android:name=".activities.Logins" />
         <activity android:name=".activities.ScreenSplash" />
         <activity android:name=".activities.Dashboards" />
-        <activity android:name=".activities.MainActivity">
-
-        </activity>
+        <activity android:name=".activities.MainActivity"></activity>
         <activity android:name=".activities.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
