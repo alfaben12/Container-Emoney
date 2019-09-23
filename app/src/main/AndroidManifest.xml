@@ -16,16 +16,18 @@
         <activity android:name=".activities.Questions" />
         <activity android:name=".activities.PaymentGateway"></activity>
         <activity android:name=".activities.Registers" />
-        <activity android:name=".activities.Logins" />
-        <activity android:name=".activities.ScreenSplash" />
-        <activity android:name=".activities.Dashboards" />
-        <activity android:name=".activities.MainActivity"></activity>
-        <activity android:name=".activities.IntroActivity">
+        <activity android:name=".activities.Logins">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.ScreenSplash" />
+        <activity android:name=".activities.Dashboards" />
+        <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.IntroActivity">
+
         </activity>
     </application>
 

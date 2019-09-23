@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.e_money_container.R;
 import com.example.e_money_container.adapters.PaymentGatewayAdapter;
+import com.example.e_money_container.helpers.PreferenceHelper;
 import com.example.e_money_container.models.PaymentGateway.Datum;
 import com.example.e_money_container.models.PaymentGateway.PaymentGatewayModel;
 import com.example.e_money_container.request.PaymentGatewayRequest;
@@ -25,12 +27,20 @@ public class PaymentGateway extends AppCompatActivity {
 
     private PaymentGatewayAdapter adapter;
     private RecyclerView recyclerView;
+    TextView txtFullName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_gateway);
 
-        /* END PROGRESS LOADER */
+        txtFullName = findViewById(R.id.txtFullName);
+
+        PreferenceHelper prefShared = new PreferenceHelper(this);
+        String accountCode = prefShared.getStr("guestAccCode");
+        String accountFullName = prefShared.getStr("guestAccFullName");
+        String accountNominal = prefShared.getStr("guestAccNominal");
+
+        txtFullName.setText(accountFullName);
 
         /*Create handle for the RetrofitInstance interface*/
         PaymentGatewayRequest service = PhpApiClient.getRetrofitInstance().create(PaymentGatewayRequest.class);
