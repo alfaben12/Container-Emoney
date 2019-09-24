@@ -31,6 +31,15 @@ public class Logins extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logins);
 
+        PreferenceHelper prefShared = new PreferenceHelper(this);
+        String accountJwtToken = prefShared.getStr("accountJwtToken");
+
+        if (accountJwtToken != null){
+            Intent redirect = new Intent(getApplicationContext(), Dashboards.class);
+            startActivity(redirect);
+            finish();
+        }
+
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -62,7 +71,7 @@ public class Logins extends AppCompatActivity {
                         Toast.makeText(Logins.this, response.body().getData().getMessage(), Toast.LENGTH_SHORT).show();
                         if (response.isSuccessful()){
                             PreferenceHelper prefShared = new PreferenceHelper(Logins.this);
-                            prefShared.setStr("accountJwtToken", response.body().getData().getDatas().getJwtTokenData());
+                            prefShared.setStr("accountJwtToken","Bearer "+ response.body().getData().getDatas().getJwtTokenData());
                             prefShared.setStr("accountName", response.body().getData().getDatas().getAccountData().getFullName());
                             prefShared.setStr("accountRole", response.body().getData().getDatas().getAccountData().getAccountRole().getName());
 
@@ -76,10 +85,15 @@ public class Logins extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<LoginModel> call, Throwable t) {
-                        Toast.makeText(Logins.this, ""+ t, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Logins.this, "Failure connection..."+ t, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
+    }
+
+    public void checkRegister(View view) {
+        Intent i = new Intent(Logins.this, Registers.class);
+        startActivity(i);
     }
 }
