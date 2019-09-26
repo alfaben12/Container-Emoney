@@ -15,6 +15,12 @@ public class Datas {
     @SerializedName("username")
     @Expose
     private String username;
+    @SerializedName("balance")
+    @Expose
+    private Integer balance;
+    @SerializedName("saving_balance")
+    @Expose
+    private Integer savingBalance;
     @SerializedName("password")
     @Expose
     private String password;
@@ -56,6 +62,22 @@ public class Datas {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+    }
+
+    public Integer getSavingBalance() {
+        return savingBalance;
+    }
+
+    public void setSavingBalance(Integer savingBalance) {
+        this.savingBalance = savingBalance;
     }
 
     public String getPassword() {

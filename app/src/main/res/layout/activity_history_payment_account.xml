@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F9FBFF"
-    tools:context=".activities.PaymentGateway">
-
+    tools:context=".activities.HistoryPaymentAccount">
 
     <View
         android:layout_width="match_parent"
@@ -18,7 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <ImageView
         android:id="@+id/imageView2"
@@ -44,13 +42,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/walletuser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/txtWalletAccount"
+        android:layout_width="209dp"
+        android:layout_height="32dp"
         android:layout_marginStart="17dp"
         android:layout_marginTop="8dp"
-        android:text="Is that your final? Pay now!"
         android:fontFamily="@font/ml"
+        android:text="Rp. 56000000 (OVO)"
         android:textColor="#FFF"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -78,15 +76,14 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="12dp"
             android:fontFamily="@font/mr"
-            android:text="Payment Gateway"
+            android:text="Payment History"
             android:textColor="#818181"
             android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="4">
+            android:orientation="horizontal">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/customRecyclerView"
@@ -95,22 +92,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/primaryTextColor"
-            app:itemIconTint="#FFFFFF"
-            app:itemTextColor="#FFFFFF"
-            app:menu="@menu/menu" />
-
-    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

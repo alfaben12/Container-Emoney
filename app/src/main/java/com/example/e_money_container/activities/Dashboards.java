@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +32,12 @@ public class Dashboards extends AppCompatActivity {
 
         PreferenceHelper prefShared = new PreferenceHelper(this);
         String accountJwtToken = prefShared.getStr("accountJwtToken");
+        String accountName = prefShared.getStr("accountName");
+        String accountRole = prefShared.getStr("accountRole");
 
         txtFullName = findViewById(R.id.txtFullName);
         txtWalletAccount = findViewById(R.id.txtWalletAccount);
+
 
         /*Create handle for the RetrofitInstance interface*/
         AccountRequest service = NodeApiClient.getRetrofitInstance().create(AccountRequest.class);
@@ -42,7 +46,11 @@ public class Dashboards extends AppCompatActivity {
             @Override
             public void onResponse(Call<AccountDataModel> call, Response<AccountDataModel> response) {
                 if (response.isSuccessful()){
+                    PreferenceHelper prefShared = new PreferenceHelper(Dashboards.this);
+
                     Toast.makeText(Dashboards.this, response.body().getData().getDatas().getFullName(), Toast.LENGTH_SHORT).show();
+                    prefShared.setStr("accountContainerApiKey", response.body().getData().getDatas().getAccountPaymentContainer().getPaymentGatewayAccountApikey());
+                    prefShared.setStr("accountBalance", response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString());
                     txtFullName.setText(response.body().getData().getDatas().getFullName());
                     txtWalletAccount.setText("Rp. " +response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString() + " (" + response.body().getData().getDatas().getAccountRole().getName() + ")");
 
@@ -56,5 +64,25 @@ public class Dashboards extends AppCompatActivity {
                 Toast.makeText(Dashboards.this, "Failure connection..."+ t, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void clickHistoryPayment(View view) {
+        Intent i = new Intent(Dashboards.this, HistoryPaymentAccount.class);
+        startActivity(i);
+    }
+
+    public void clickWallet(View view) {
+        Intent i = new Intent(Dashboards.this, SetupEmoneyContainer.class);
+        startActivity(i);
+    }
+
+    public void clickSaving(View view) {
+        Intent i = new Intent(Dashboards.this, AccountSaving.class);
+        startActivity(i);
+    }
+
+    public void clickMyAccount(View view) {
+        Intent i = new Intent(Dashboards.this, AccountUpdate.class);
+        startActivity(i);
     }
 }

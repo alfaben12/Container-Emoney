@@ -22,6 +22,10 @@ public class AccountPaymentContainer {
     @Expose
     private String updatedAt;
 
+    @SerializedName("payment_gateway_account_apikey")
+    @Expose
+    private String paymentGatewayAccountApikey;
+
     public Integer getId() {
         return id;
     }
@@ -60,6 +64,14 @@ public class AccountPaymentContainer {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getPaymentGatewayAccountApikey() {
+        return paymentGatewayAccountApikey;
+    }
+
+    public void setPaymentGatewayAccountApikey(String paymentGatewayAccountApikey) {
+        this.paymentGatewayAccountApikey = paymentGatewayAccountApikey;
     }
 
 }

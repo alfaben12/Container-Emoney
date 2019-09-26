@@ -68,12 +68,13 @@ public class Logins extends AppCompatActivity {
                 call.enqueue(new Callback<LoginModel>() {
                     @Override
                     public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
-                        Toast.makeText(Logins.this, response.body().getData().getMessage(), Toast.LENGTH_SHORT).show();
                         if (response.isSuccessful()){
+                            Toast.makeText(Logins.this, response.body().getData().getMessage(), Toast.LENGTH_SHORT).show();
                             PreferenceHelper prefShared = new PreferenceHelper(Logins.this);
                             prefShared.setStr("accountJwtToken","Bearer "+ response.body().getData().getDatas().getJwtTokenData());
                             prefShared.setStr("accountName", response.body().getData().getDatas().getAccountData().getFullName());
                             prefShared.setStr("accountRole", response.body().getData().getDatas().getAccountData().getAccountRole().getName());
+                            prefShared.setStr("accountBalance", response.body().getData().getDatas().getAccountData().getAccountPaymentContainer().getBalance().toString());
 
                             Intent redirect = new Intent(getApplicationContext(), Dashboards.class);
                             startActivity(redirect);

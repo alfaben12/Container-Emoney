@@ -27,6 +27,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="26dp"
         android:src="@drawable/icpeople"
+        android:onClick="clickMyAccount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,6 +100,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
+                    android:onClick="clickHistoryPayment"
                     android:src="@drawable/ic_checklist" />
 
                 <TextView
@@ -147,6 +149,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
+                    android:onClick="clickWallet"
                     android:src="@drawable/ic_wallet" />
 
                 <TextView
@@ -170,6 +173,7 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:onClick="clickSaving"
                     android:layout_marginBottom="8dp"
                     android:src="@drawable/ic_balance" />
 
