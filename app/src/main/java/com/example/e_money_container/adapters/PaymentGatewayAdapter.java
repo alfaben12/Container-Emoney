@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_money_container.R;
+import com.example.e_money_container.activities.Dashboards;
+import com.example.e_money_container.activities.ThankYou;
 import com.example.e_money_container.helpers.PreferenceHelper;
 import com.example.e_money_container.models.Payment.MutationtModel;
 import com.example.e_money_container.models.Payment.PaymentMoveModel;
@@ -99,6 +101,9 @@ public class PaymentGatewayAdapter extends RecyclerView.Adapter<PaymentGatewayAd
                                 public void onResponse(Call<PaymentMoveModel> call1, Response<PaymentMoveModel> response1) {
                                     if (response1.isSuccessful()){
                                         Toast.makeText(context, response1.body().getData().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                        Intent i = new Intent(context, ThankYou.class);
+                                        context.startActivity(i);
                                     }else{
                                         Toast.makeText(context, "Your mutation exist, but payment failed.", Toast.LENGTH_SHORT).show();
                                     }

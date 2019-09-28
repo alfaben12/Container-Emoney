@@ -78,7 +78,7 @@ public class PaymentGatewayContainerAdapter extends RecyclerView.Adapter<Payment
                 .error(R.drawable.ic_card_loader)
                 .into(holder.imgLogo);
 
-        final Integer paymentGatewayContainerID = dataList.get(position).getId();
+        final String paymentGatewayContainerID = dataList.get(position).getName();
         holder.imgLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +97,7 @@ public class PaymentGatewayContainerAdapter extends RecyclerView.Adapter<Payment
                             Intent i = new Intent(context, Dashboards.class);
                             context.startActivity(i);
                         }else{
-                            Toast.makeText(context, "Failed account can't integrated or third-party not found.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Failed account can't integrated or third-party not found." + response.code(), Toast.LENGTH_SHORT).show();
                         }
                     }
 

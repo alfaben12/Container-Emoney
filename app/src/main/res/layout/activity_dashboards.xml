@@ -125,6 +125,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
+                    android:onClick="clickSecurity"
                     android:src="@drawable/ic_security_shield" />
 
                 <TextView
@@ -251,6 +252,7 @@
         android:textColor="#FFF"
         android:fontFamily="@font/mm"
         android:text="Guide Me"
+        android:onClick="clickGuideMe"
         android:textAllCaps="false"
         android:background="@drawable/bgbtnguide"
         app:layout_constraintEnd_toEndOf="parent"

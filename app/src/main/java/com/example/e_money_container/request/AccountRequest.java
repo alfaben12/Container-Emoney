@@ -41,6 +41,6 @@ public interface AccountRequest {
     @POST("emoneycontainers")
     Call<AccountModel> updatePaymentContainer(
             @Header("Authorization") String token,
-            @Field("payment_gateway_containerid") int payment_gateway_containerid,
+            @Field("payment_gateway_containerid") String payment_gateway_containerid,
             @Field("payment_gateway_account_apikey") String payment_gateway_account_apikey);
 }

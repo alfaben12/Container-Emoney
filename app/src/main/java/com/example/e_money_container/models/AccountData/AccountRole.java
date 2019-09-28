@@ -12,6 +12,12 @@ public class AccountRole {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("transaction_limit")
+    @Expose
+    private Integer transactionLimit;
+    @SerializedName("transaction_limit_count")
+    @Expose
+    private Integer transactionLimitCount;
 
     public Integer getId() {
         return id;
@@ -27,6 +33,22 @@ public class AccountRole {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getTransactionLimit() {
+        return transactionLimit;
+    }
+
+    public void setTransactionLimit(Integer transactionLimit) {
+        this.transactionLimit = transactionLimit;
+    }
+
+    public Integer getTransactionLimitCount() {
+        return transactionLimitCount;
+    }
+
+    public void setTransactionLimitCount(Integer transactionLimitCount) {
+        this.transactionLimitCount = transactionLimitCount;
     }
 
 }

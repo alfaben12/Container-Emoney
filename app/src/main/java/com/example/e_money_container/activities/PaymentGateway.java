@@ -72,11 +72,11 @@ public class PaymentGateway extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.guide:
-                        Intent i = new Intent(PaymentGateway.this, Logins.class);
+                        Intent i = new Intent(PaymentGateway.this, GuideMe.class);
                         startActivity(i);
                         break;
                     case R.id.help:
-                        Intent menuIntent = new Intent(PaymentGateway.this, Logins.class);
+                        Intent menuIntent = new Intent(PaymentGateway.this, Helps.class);
                         startActivity(menuIntent);
                         break;
                     case R.id.login:

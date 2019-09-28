@@ -81,7 +81,18 @@ public class Dashboards extends AppCompatActivity {
     }
 
     public void clickMyAccount(View view) {
-        Intent i = new Intent(Dashboards.this, AccountUpdate.class);
+        Intent i = new Intent(Dashboards.this, Profile.class);
         startActivity(i);
     }
+
+    public void clickGuideMe(View view) {
+        Intent i = new Intent(Dashboards.this, GuideMe.class);
+        startActivity(i);
+    }
+
+    public void clickSecurity(View view) {
+        Intent i = new Intent(Dashboards.this, Security.class);
+        startActivity(i);
+    }
+
 }

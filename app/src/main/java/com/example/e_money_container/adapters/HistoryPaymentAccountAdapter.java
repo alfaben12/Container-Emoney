@@ -92,7 +92,12 @@ public class HistoryPaymentAccountAdapter extends RecyclerView.Adapter<HistoryPa
 
         holder.txt_createdAt.setText(formatted);
         holder.txt_from_payment_gateway_name.setText(dataList.get(position).getFromPaymentGatewayName());
-        holder.txt_nominal.setText("Rp. "+ dataList.get(position).getNominal().toString());
+        if (dataList.get(position).getCharge().equals(0)){
+            holder.txt_nominal.setText("Rp. "+ dataList.get(position).getNominal().toString());
+        }else{
+            holder.txt_nominal.setText("Rp. "+ dataList.get(position).getNominal().toString() +" (- Rp."+ dataList.get(position).getCharge().toString() +")");
+
+        }
 
         if (dataList.get(position).getIsTransferred().equals(1)){
             holder.btnTransfer.setVisibility(View.INVISIBLE);

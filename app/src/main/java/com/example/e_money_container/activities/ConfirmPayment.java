@@ -39,6 +39,15 @@ public class ConfirmPayment extends AppCompatActivity {
         etNominal = findViewById(R.id.etNominal);
         btnConfirm = findViewById(R.id.btnConfirm);
 
+        PreferenceHelper prefShared = new PreferenceHelper(this);
+        String accountJwtToken = prefShared.getStr("accountJwtToken");
+
+        if (accountJwtToken != null){
+            Intent redirect = new Intent(getApplicationContext(), Dashboards.class);
+            startActivity(redirect);
+            finish();
+        }
+
         // inflate the layout
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {

@@ -22,6 +22,9 @@ public class Datum {
     @SerializedName("nominal")
     @Expose
     private Integer nominal;
+    @SerializedName("charge")
+    @Expose
+    private Integer charge;
     @SerializedName("is_transferred")
     @Expose
     private Integer isTransferred;
@@ -67,6 +70,14 @@ public class Datum {
 
     public void setNominal(Integer nominal) {
         this.nominal = nominal;
+    }
+
+    public Integer getCharge() {
+        return charge;
+    }
+
+    public void setCharge(Integer charge) {
+        this.charge = charge;
     }
 
     public Integer getIsTransferred() {

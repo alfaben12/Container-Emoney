@@ -12,26 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.SetupEmoneyContainer">
-
-        </activity>
-        <activity android:name=".activities.PaymentGatewayContainer">
-
-        </activity>
-        <activity android:name=".activities.AccountSaving"></activity>
+        <activity android:name=".activities.Profile"></activity>
+        <activity android:name=".activities.Security" />
+        <activity android:name=".activities.GuideMe" />
+        <activity android:name=".activities.ThankYou" />
+        <activity android:name=".activities.Helps" />
+        <activity android:name=".activities.SetupEmoneyContainer" />
+        <activity android:name=".activities.PaymentGatewayContainer" />
+        <activity android:name=".activities.AccountSaving" />
         <activity android:name=".activities.AccountUpdate" />
         <activity android:name=".activities.HistoryPaymentAccount" />
         <activity android:name=".activities.ConfirmPayment" />
         <activity android:name=".activities.Questions" />
         <activity android:name=".activities.PaymentGateway" />
         <activity android:name=".activities.Registers" />
-        <activity android:name=".activities.Logins">
-
-        </activity>
+        <activity android:name=".activities.Logins" />
         <activity android:name=".activities.ScreenSplash" />
-        <activity android:name=".activities.Dashboards">
-
-        </activity>
+        <activity android:name=".activities.Dashboards" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.IntroActivity">
             <intent-filter>
