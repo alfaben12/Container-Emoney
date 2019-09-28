@@ -4,6 +4,7 @@ package com.example.e_money_container.models.PaymentHistory;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
 public class Datum {
 
     @SerializedName("id")
@@ -11,7 +12,7 @@ public class Datum {
     private Integer id;
     @SerializedName("uuid")
     @Expose
-    private Object uuid;
+    private String uuid;
     @SerializedName("from_payment_gateway_name")
     @Expose
     private String fromPaymentGatewayName;
@@ -21,6 +22,9 @@ public class Datum {
     @SerializedName("nominal")
     @Expose
     private Integer nominal;
+    @SerializedName("is_transferred")
+    @Expose
+    private Integer isTransferred;
     @SerializedName("createdAt")
     @Expose
     private String createdAt;
@@ -33,11 +37,11 @@ public class Datum {
         this.id = id;
     }
 
-    public Object getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(Object uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
@@ -63,6 +67,14 @@ public class Datum {
 
     public void setNominal(Integer nominal) {
         this.nominal = nominal;
+    }
+
+    public Integer getIsTransferred() {
+        return isTransferred;
+    }
+
+    public void setIsTransferred(Integer isTransferred) {
+        this.isTransferred = isTransferred;
     }
 
     public String getCreatedAt() {

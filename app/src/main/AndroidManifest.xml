@@ -26,6 +26,7 @@
         <activity android:name=".activities.PaymentGateway" />
         <activity android:name=".activities.Registers" />
         <activity android:name=".activities.Logins">
+
         </activity>
         <activity android:name=".activities.ScreenSplash" />
         <activity android:name=".activities.Dashboards">

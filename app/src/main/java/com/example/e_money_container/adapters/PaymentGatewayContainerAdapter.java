@@ -78,7 +78,7 @@ public class PaymentGatewayContainerAdapter extends RecyclerView.Adapter<Payment
                 .error(R.drawable.ic_card_loader)
                 .into(holder.imgLogo);
 
-        final String paymentGatewayContainerID = dataList.get(position).getName();
+        final Integer paymentGatewayContainerID = dataList.get(position).getId();
         holder.imgLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

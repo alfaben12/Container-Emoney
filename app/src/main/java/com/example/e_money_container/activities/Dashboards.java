@@ -47,7 +47,6 @@ public class Dashboards extends AppCompatActivity {
             public void onResponse(Call<AccountDataModel> call, Response<AccountDataModel> response) {
                 if (response.isSuccessful()){
                     PreferenceHelper prefShared = new PreferenceHelper(Dashboards.this);
-
                     Toast.makeText(Dashboards.this, response.body().getData().getDatas().getFullName(), Toast.LENGTH_SHORT).show();
                     prefShared.setStr("accountContainerApiKey", response.body().getData().getDatas().getAccountPaymentContainer().getPaymentGatewayAccountApikey());
                     prefShared.setStr("accountBalance", response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString());

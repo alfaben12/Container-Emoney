@@ -86,4 +86,9 @@ public class ConfirmPayment extends AppCompatActivity {
             }
         });
     }
+
+    public void clickLogin(View view) {
+        Intent i = new Intent(ConfirmPayment.this, Logins.class);
+        startActivity(i);
+    }
 }

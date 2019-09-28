@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,10 +17,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.example.e_money_container.R;
+import com.example.e_money_container.activities.Dashboards;
+import com.example.e_money_container.activities.PaymentGateway;
 import com.example.e_money_container.helpers.PreferenceHelper;
+import com.example.e_money_container.models.Account.AccountModel;
 import com.example.e_money_container.models.Payment.MutationtModel;
 import com.example.e_money_container.models.Payment.PaymentMoveModel;
 import com.example.e_money_container.models.PaymentHistory.Datum;
+import com.example.e_money_container.models.PaymentTransfer.PaymentTransferModel;
+import com.example.e_money_container.request.AccountRequest;
 import com.example.e_money_container.request.PaymentRequest;
 import com.example.e_money_container.retrofit.NodeApiClient;
 import com.example.e_money_container.retrofit.PhpApiClient;
@@ -48,6 +54,7 @@ public class HistoryPaymentAccountAdapter extends RecyclerView.Adapter<HistoryPa
         public final View mView;
 
         private TextView txt_createdAt, txt_from_payment_gateway_name, txt_nominal;
+        private Button btnTransfer;
 
         CustomViewHolder(View itemView) {
             super(itemView);
@@ -56,6 +63,7 @@ public class HistoryPaymentAccountAdapter extends RecyclerView.Adapter<HistoryPa
             txt_createdAt = mView.findViewById(R.id.txt_createdAt);
             txt_from_payment_gateway_name = mView.findViewById(R.id.txt_from_payment_gateway_name);
             txt_nominal = mView.findViewById(R.id.txt_nominal);
+            btnTransfer = mView.findViewById(R.id.btnTransfer);
         }
     }
 
@@ -85,6 +93,42 @@ public class HistoryPaymentAccountAdapter extends RecyclerView.Adapter<HistoryPa
         holder.txt_createdAt.setText(formatted);
         holder.txt_from_payment_gateway_name.setText(dataList.get(position).getFromPaymentGatewayName());
         holder.txt_nominal.setText("Rp. "+ dataList.get(position).getNominal().toString());
+
+        if (dataList.get(position).getIsTransferred().equals(1)){
+            holder.btnTransfer.setVisibility(View.INVISIBLE);
+        }
+
+        final Integer nominal = dataList.get(position).getNominal();
+        final Integer paymenthistoryid = dataList.get(position).getId();
+        holder.btnTransfer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PreferenceHelper prefShared = new PreferenceHelper(context);
+                String accountContainerApiKey = prefShared.getStr("accountContainerApiKey");
+                String accountJwtToken = prefShared.getStr("accountJwtToken");
+
+                /*Create handle for the RetrofitInstance interface*/
+                PaymentRequest service = NodeApiClient.getRetrofitInstance().create(PaymentRequest.class);
+                Call<PaymentTransferModel> call = service.pay_transfer(accountJwtToken, nominal, paymenthistoryid);
+                call.enqueue(new Callback<PaymentTransferModel>() {
+                    @Override
+                    public void onResponse(Call<PaymentTransferModel> call, Response<PaymentTransferModel> response) {
+                        if (response.isSuccessful()){
+                            Toast.makeText(context, "Yey amount is transferred.", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(context, Dashboards.class);
+                            context.startActivity(i);
+                        }else{
+                            Toast.makeText(context, "Failed check your limit.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PaymentTransferModel> call, Throwable t) {
+                        Toast.makeText(context, "Error ..."+ t, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     @Override
