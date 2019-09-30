@@ -78,7 +78,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="12dp"
             android:fontFamily="@font/mr"
-            android:text="Ohhh look confim it's successfully, Thank You.."
+            android:text="Ohhh look confirm it's successfully, Thank You.."
             android:textColor="#818181"
             android:textSize="16sp" />
 
