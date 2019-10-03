@@ -53,7 +53,7 @@ public class HistoryPaymentAccountAdapter extends RecyclerView.Adapter<HistoryPa
 
         public final View mView;
 
-        private TextView txt_createdAt, txt_from_payment_gateway_name, txt_nominal;
+        private TextView txt_createdAt, txt_from_payment_gateway_name, txt_nominal, txt_type;
         private Button btnTransfer;
 
         CustomViewHolder(View itemView) {
@@ -63,6 +63,7 @@ public class HistoryPaymentAccountAdapter extends RecyclerView.Adapter<HistoryPa
             txt_createdAt = mView.findViewById(R.id.txt_createdAt);
             txt_from_payment_gateway_name = mView.findViewById(R.id.txt_from_payment_gateway_name);
             txt_nominal = mView.findViewById(R.id.txt_nominal);
+            txt_type = mView.findViewById(R.id.txt_type);
             btnTransfer = mView.findViewById(R.id.btnTransfer);
         }
     }
@@ -90,13 +91,21 @@ public class HistoryPaymentAccountAdapter extends RecyclerView.Adapter<HistoryPa
         }
         String formatted = output.format(d);
 
+        PreferenceHelper prefShared = new PreferenceHelper(context);
+        Integer accountId = Integer.parseInt(prefShared.getStr("accountId"));
+        if (dataList.get(position).getAccountid().equals(accountId)){
+            holder.txt_type.setText("Income");
+        }else{
+            holder.txt_type.setText("Expand");
+            holder.btnTransfer.setVisibility(View.INVISIBLE);
+        }
+
         holder.txt_createdAt.setText(formatted);
         holder.txt_from_payment_gateway_name.setText(dataList.get(position).getFromPaymentGatewayName());
         if (dataList.get(position).getCharge().equals(0)){
             holder.txt_nominal.setText("Rp. "+ dataList.get(position).getNominal().toString());
         }else{
             holder.txt_nominal.setText("Rp. "+ dataList.get(position).getNominal().toString() +" (- Rp."+ dataList.get(position).getCharge().toString() +")");
-
         }
 
         if (dataList.get(position).getIsTransferred().equals(1)){

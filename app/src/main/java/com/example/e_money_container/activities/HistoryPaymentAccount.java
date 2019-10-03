@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,11 +31,18 @@ public class HistoryPaymentAccount extends AppCompatActivity {
     private HistoryPaymentAccountAdapter adapter;
     private RecyclerView recyclerView;
     TextView txtFullName, txtWalletAccount;
+    ProgressDialog progressDoalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_payment_account);
+
+        /* INIT PROGRESS LOADER */
+        progressDoalog = new ProgressDialog(this);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.show();
+        /* END PROGRESS LOADER */
 
         PreferenceHelper prefShared = new PreferenceHelper(this);
         String accountJwtToken = prefShared.getStr("accountJwtToken");
@@ -57,15 +65,17 @@ public class HistoryPaymentAccount extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Toast.makeText(HistoryPaymentAccount.this, response.body().getData().getMessage(), Toast.LENGTH_SHORT).show();
                     generateDataList(response.body().getData().getData());
-
+                    progressDoalog.dismiss();
                 }else{
                     Toast.makeText(HistoryPaymentAccount.this, "Account not found ...", Toast.LENGTH_SHORT).show();
+                    progressDoalog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<PaymentHistoryModel> call, Throwable t) {
                 Toast.makeText(HistoryPaymentAccount.this, "Failure connection..."+ t, Toast.LENGTH_SHORT).show();
+                progressDoalog.dismiss();
             }
         });
     }

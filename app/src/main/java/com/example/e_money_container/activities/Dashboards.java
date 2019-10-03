@@ -3,6 +3,7 @@ package com.example.e_money_container.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.accounts.Account;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ import retrofit2.Response;
 public class Dashboards extends AppCompatActivity {
 
     TextView txtFullName, txtWalletAccount;
+    ProgressDialog progressDoalog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,11 @@ public class Dashboards extends AppCompatActivity {
 
         txtFullName = findViewById(R.id.txtFullName);
         txtWalletAccount = findViewById(R.id.txtWalletAccount);
-
+        /* INIT PROGRESS LOADER */
+        progressDoalog = new ProgressDialog(Dashboards.this);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.show();
+        /* END PROGRESS LOADER */
 
         /*Create handle for the RetrofitInstance interface*/
         AccountRequest service = NodeApiClient.getRetrofitInstance().create(AccountRequest.class);
@@ -52,15 +58,17 @@ public class Dashboards extends AppCompatActivity {
                     prefShared.setStr("accountBalance", response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString());
                     txtFullName.setText(response.body().getData().getDatas().getFullName());
                     txtWalletAccount.setText("Rp. " +response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString() + " (" + response.body().getData().getDatas().getAccountRole().getName() + ")");
-
+                    progressDoalog.dismiss();
                 }else{
                     Toast.makeText(Dashboards.this, "Account not found ...", Toast.LENGTH_SHORT).show();
+                    progressDoalog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<AccountDataModel> call, Throwable t) {
                 Toast.makeText(Dashboards.this, "Failure connection..."+ t, Toast.LENGTH_SHORT).show();
+                progressDoalog.dismiss();
             }
         });
     }
@@ -90,9 +98,13 @@ public class Dashboards extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void clickSecurity(View view) {
-        Intent i = new Intent(Dashboards.this, Security.class);
+    public void clickPayment(View view) {
+        Intent i = new Intent(Dashboards.this, PaymentGateway.class);
         startActivity(i);
+    }
+
+    public void clickRefresh(View view) {
+        this.recreate();
     }
 
 }

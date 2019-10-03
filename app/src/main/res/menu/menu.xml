@@ -11,5 +11,5 @@
     <item
         android:id="@+id/login"
         android:icon="@drawable/ic_account_box_white_24dp"
-        android:title="Login"/>
+        android:title="Dashbords"/>
 </menu>

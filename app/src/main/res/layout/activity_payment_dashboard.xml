@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F9FBFF"
-    tools:context=".activities.Dashboards">
+    tools:context=".activities.PaymentDashboard">
 
 
     <View
@@ -27,7 +27,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="26dp"
         android:src="@drawable/icpeople"
-        android:onClick="clickMyAccount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,21 +43,10 @@
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/img_refresh"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        android:onClick="clickRefresh"
-        android:src="@drawable/ic_autorenew_black_24dp"
-        app:layout_constraintStart_toEndOf="@+id/txtWalletAccount"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/txtWalletAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_width="209dp"
+        android:layout_height="32dp"
         android:layout_marginStart="17dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/ml"
@@ -111,7 +99,6 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
-                    android:onClick="clickHistoryPayment"
                     android:src="@drawable/ic_checklist" />
 
                 <TextView
@@ -135,8 +122,8 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:onClick="clickPay"
                     android:layout_marginBottom="8dp"
-                    android:onClick="clickPayment"
                     android:src="@drawable/ic_security_shield" />
 
                 <TextView
@@ -144,56 +131,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Payment"
-                    android:fontFamily="@font/mm"
-                    android:textColor="#172646"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="8dp"
-                    android:onClick="clickWallet"
-                    android:src="@drawable/ic_wallet" />
-
-                <TextView
-                    android:id="@+id/plugins"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Wallet"
-                    android:fontFamily="@font/mm"
-                    android:textColor="#172646"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:onClick="clickSaving"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_balance" />
-
-                <TextView
-                    android:id="@+id/myapps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Saving"
                     android:fontFamily="@font/mm"
                     android:textColor="#172646"
                     android:textSize="16sp" />
@@ -265,7 +202,6 @@
         android:textColor="#FFF"
         android:fontFamily="@font/mm"
         android:text="Guide Me"
-        android:onClick="clickGuideMe"
         android:textAllCaps="false"
         android:background="@drawable/bgbtnguide"
         app:layout_constraintEnd_toEndOf="parent"

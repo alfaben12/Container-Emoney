@@ -3,6 +3,7 @@ package com.example.e_money_container.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.accounts.Account;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,11 +30,17 @@ public class AccountUpdate extends AppCompatActivity {
     EditText etName, etUsername, etAddress, etEmail, etPassword;
     TextView txtFullName, txtWalletAccount;
     Button btnUpdate;
-
+    ProgressDialog progressDoalog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_update);
+
+        /* INIT PROGRESS LOADER */
+        progressDoalog = new ProgressDialog(this);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.show();
+        /* END PROGRESS LOADER */
 
         PreferenceHelper prefShared = new PreferenceHelper(this);
         final String accountJwtToken = prefShared.getStr("accountJwtToken");
@@ -66,20 +73,29 @@ public class AccountUpdate extends AppCompatActivity {
                     etName.setText(response.body().getData().getDatas().getFullName());
                     etEmail.setText(response.body().getData().getDatas().getEmail());
                     etAddress.setText(response.body().getData().getDatas().getAddress());
+                    progressDoalog.dismiss();
                 }else{
                     Toast.makeText(AccountUpdate.this, "Account not found ...", Toast.LENGTH_SHORT).show();
+                    progressDoalog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<AccountDataModel> call, Throwable t) {
                 Toast.makeText(AccountUpdate.this, "Failure connection..."+ t, Toast.LENGTH_SHORT).show();
+                progressDoalog.dismiss();
             }
         });
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /* INIT PROGRESS LOADER */
+                progressDoalog = new ProgressDialog(AccountUpdate.this);
+                progressDoalog.setMessage("Loading....");
+                progressDoalog.show();
+                /* END PROGRESS LOADER */
+
                 if(etName.getText().toString().trim().length() == 0){
                     Toast.makeText(AccountUpdate.this, "Name required", Toast.LENGTH_SHORT).show();
                     return;

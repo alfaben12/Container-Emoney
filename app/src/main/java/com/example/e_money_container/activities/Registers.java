@@ -2,6 +2,7 @@ package com.example.e_money_container.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,10 +26,17 @@ public class Registers extends AppCompatActivity {
 
     EditText etName, etUsername, etAddress, etEmail, etPassword;
     Button btnRegister;
+    ProgressDialog progressDoalog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registers);
+
+        /* INIT PROGRESS LOADER */
+        progressDoalog = new ProgressDialog(this);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.show();
+        /* END PROGRESS LOADER */
 
         etName = findViewById(R.id.etName);
         etUsername = findViewById(R.id.etUsername);
@@ -80,11 +88,13 @@ public class Registers extends AppCompatActivity {
                     public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
                         Toast.makeText(Registers.this, response.body().getData().getMessage(), Toast.LENGTH_SHORT).show();
                         if (response.isSuccessful()){
+                            progressDoalog.dismiss();
                             Intent redirect = new Intent(getApplicationContext(), Logins.class);
                             startActivity(redirect);
                             finish();
                         }else{
                             Toast.makeText(Registers.this, "Account not found ...", Toast.LENGTH_SHORT).show();
+                            progressDoalog.dismiss();
                         }
                     }
 

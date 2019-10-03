@@ -3,6 +3,7 @@ package com.example.e_money_container.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.accounts.Account;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,12 +25,28 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Profile extends AppCompatActivity {
-
-    TextView username, name, savingBalance, savingTargetBalance, email, address, roleName, limit, containerBalance, accountCreated;
+    ProgressDialog progressDoalog;
+    TextView txtFullName, txtWalletAccount, username, name, savingBalance, savingTargetBalance, email, address, roleName, limit, containerBalance, accountCreated;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        /* INIT PROGRESS LOADER */
+        progressDoalog = new ProgressDialog(this);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.show();
+        /* END PROGRESS LOADER */
+        PreferenceHelper prefShared = new PreferenceHelper(this);
+        String accountJwtToken = prefShared.getStr("accountJwtToken");
+        String accountName = prefShared.getStr("accountName");
+        String accountBalance = prefShared.getStr("accountBalance");
+        String accountRole = prefShared.getStr("accountRole");
+
+        txtFullName = findViewById(R.id.txtFullName);
+        txtWalletAccount = findViewById(R.id.txtWalletAccount);
+
+        txtFullName.setText(accountName);
+        txtWalletAccount.setText("Rp. " + accountBalance + " (" + accountRole + ")");
 
         username = findViewById(R.id.username);
         name = findViewById(R.id.name);
@@ -41,9 +58,6 @@ public class Profile extends AppCompatActivity {
         limit = findViewById(R.id.limit);
         containerBalance = findViewById(R.id.containerBalance);
         accountCreated = findViewById(R.id.accountCreated);
-
-        PreferenceHelper prefShared = new PreferenceHelper(this);
-        String accountJwtToken = prefShared.getStr("accountJwtToken");
 
         /*Create handle for the RetrofitInstance interface*/
         AccountRequest service = NodeApiClient.getRetrofitInstance().create(AccountRequest.class);
@@ -81,14 +95,17 @@ public class Profile extends AppCompatActivity {
                     String formatted = output.format(d);
 
                     accountCreated.setText(formatted);
+                    progressDoalog.dismiss();
                 }else{
                     Toast.makeText(Profile.this, "Account not found ...", Toast.LENGTH_SHORT).show();
+                    progressDoalog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<AccountDataModel> call, Throwable t) {
                 Toast.makeText(Profile.this, "Failure connection..."+ t, Toast.LENGTH_SHORT).show();
+                progressDoalog.dismiss();
             }
         });
     }

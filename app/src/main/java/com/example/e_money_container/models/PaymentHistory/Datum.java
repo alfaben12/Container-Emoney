@@ -10,6 +10,9 @@ public class Datum {
     @SerializedName("id")
     @Expose
     private Integer id;
+    @SerializedName("accountid")
+    @Expose
+    private Integer accountid;
     @SerializedName("uuid")
     @Expose
     private String uuid;
@@ -38,6 +41,14 @@ public class Datum {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getAccountid() {
+        return accountid;
+    }
+
+    public void setAccountid(Integer accountid) {
+        this.accountid = accountid;
     }
 
     public String getUuid() {

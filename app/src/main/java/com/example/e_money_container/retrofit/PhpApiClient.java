@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PhpApiClient {
     public static Retrofit retrofit;
-    public static final String BASE_URL = "http://bank.kutjur.com/index.php/";
+    public static final String BASE_URL = "https://bank.kutjur.com/index.php/";
 
     public static Retrofit getRetrofitInstance(){
         if (retrofit == null){

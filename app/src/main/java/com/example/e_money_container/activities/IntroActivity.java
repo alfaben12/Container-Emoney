@@ -49,7 +49,7 @@ public class IntroActivity extends AppCompatActivity {
 
         if (restorePrefData()) {
 
-            Intent mainActivity = new Intent(getApplicationContext(), ConfirmPayment.class );
+            Intent mainActivity = new Intent(getApplicationContext(), Logins.class );
             startActivity(mainActivity);
             finish();
 
@@ -151,7 +151,7 @@ public class IntroActivity extends AppCompatActivity {
 
                 //open main activity
 
-                Intent mainActivity = new Intent(getApplicationContext(),ConfirmPayment.class);
+                Intent mainActivity = new Intent(getApplicationContext(),Logins.class);
                 startActivity(mainActivity);
                 // also we need to save a boolean value to storage so next time when the user run the app
                 // we could know that he is already checked the intro screen activity

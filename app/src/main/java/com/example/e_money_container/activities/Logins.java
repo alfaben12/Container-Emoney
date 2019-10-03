@@ -75,6 +75,7 @@ public class Logins extends AppCompatActivity {
                             prefShared.setStr("accountName", response.body().getData().getDatas().getAccountData().getFullName());
                             prefShared.setStr("accountRole", response.body().getData().getDatas().getAccountData().getAccountRole().getName());
                             prefShared.setStr("accountBalance", response.body().getData().getDatas().getAccountData().getAccountPaymentContainer().getBalance().toString());
+                            prefShared.setStr("accountId", response.body().getData().getDatas().getAccountData().getId().toString());
 
                             Intent redirect = new Intent(getApplicationContext(), Dashboards.class);
                             startActivity(redirect);
