@@ -11,7 +11,6 @@
         <RelativeLayout
             style="@style/parent">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -46,7 +45,7 @@
                 <TextView
                     style="@style/headerText"
                     android:layout_gravity="center"
-                    android:text="E-Money Container"
+                    android:text="E-Wallet Container"
                     android:layout_marginTop="40dp"/>
                 <androidx.cardview.widget.CardView
                     xmlns:android="http://schemas.android.com/apk/res/android"

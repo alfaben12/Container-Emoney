@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,6 +63,11 @@ public class PaymentGatewayApiAdapter extends RecyclerView.Adapter<PaymentGatewa
             public void onClick(View view) {
                 PreferenceHelper prefShared = new PreferenceHelper(context);
                 prefShared.setStr("accountFromPaymentGateway", payment_gateway);
+                String accountToPaymentGateway = prefShared.getStr("accountToPaymentGateway");
+                if (payment_gateway != accountToPaymentGateway){
+                    Toast.makeText(context, "Cant confirm from " + payment_gateway +" to "+ accountToPaymentGateway, Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 Intent intent = new Intent(context, ConfirmPayment.class);
                 context.startActivity(intent);

@@ -12,9 +12,9 @@
         android:roundIcon="@drawable/zpaycontainer"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.PaymentThirdPartyIntegration">
-
-        </activity>
+        <activity android:name=".activities.PaymentGateway2"></activity>
+        <activity android:name=".activities.PaymentIntegration" />
+        <activity android:name=".activities.PaymentThirdPartyIntegration" />
         <activity android:name=".activities.PaymentDashboard" />
         <activity android:name=".activities.Profile" />
         <activity android:name=".activities.Security" />
@@ -26,15 +26,11 @@
         <activity android:name=".activities.AccountSaving" />
         <activity android:name=".activities.AccountUpdate" />
         <activity android:name=".activities.HistoryPaymentAccount" />
-        <activity android:name=".activities.ConfirmPayment">
-
-        </activity>
+        <activity android:name=".activities.ConfirmPayment" />
         <activity android:name=".activities.Questions" />
         <activity android:name=".activities.PaymentGateway" />
         <activity android:name=".activities.Registers" />
-        <activity android:name=".activities.Logins">
-
-        </activity>
+        <activity android:name=".activities.Logins" />
         <activity android:name=".activities.ScreenSplash" />
         <activity android:name=".activities.Dashboards" />
         <activity android:name=".activities.MainActivity" />

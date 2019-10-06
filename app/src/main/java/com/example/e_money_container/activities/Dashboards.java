@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.accounts.Account;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -99,7 +101,7 @@ public class Dashboards extends AppCompatActivity {
     }
 
     public void clickPayment(View view) {
-        Intent i = new Intent(Dashboards.this, PaymentGateway.class);
+        Intent i = new Intent(Dashboards.this, PaymentDashboard.class);
         startActivity(i);
     }
 
@@ -107,4 +109,8 @@ public class Dashboards extends AppCompatActivity {
         this.recreate();
     }
 
+    public void clickLogout(View view) {
+        SharedPreferences settings = getSharedPreferences("emoney_pref", Context.MODE_PRIVATE);
+        settings.edit().clear().commit();
+    }
 }

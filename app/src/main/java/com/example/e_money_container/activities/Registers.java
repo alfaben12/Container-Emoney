@@ -32,12 +32,6 @@ public class Registers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registers);
 
-        /* INIT PROGRESS LOADER */
-        progressDoalog = new ProgressDialog(this);
-        progressDoalog.setMessage("Loading....");
-        progressDoalog.show();
-        /* END PROGRESS LOADER */
-
         etName = findViewById(R.id.etName);
         etUsername = findViewById(R.id.etUsername);
         etAddress = findViewById(R.id.etAddress);
@@ -48,29 +42,35 @@ public class Registers extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /* INIT PROGRESS LOADER */
+                progressDoalog = new ProgressDialog(Registers.this);
+                progressDoalog.setMessage("Loading....");
+                progressDoalog.show();
+                /* END PROGRESS LOADER */
+
                 if(etName.getText().toString().trim().length() == 0){
                     Toast.makeText(Registers.this, "Name required", Toast.LENGTH_SHORT).show();
-                    return;
+                    progressDoalog.dismiss();
                 }
 
                 if(etUsername.getText().toString().trim().length() == 0){
                     Toast.makeText(Registers.this, "Username required", Toast.LENGTH_SHORT).show();
-                    return;
+                    progressDoalog.dismiss();
                 }
 
                 if(etAddress.getText().toString().trim().length() == 0){
                     Toast.makeText(Registers.this, "Address required", Toast.LENGTH_SHORT).show();
-                    return;
+                    progressDoalog.dismiss();
                 }
 
                 if(etEmail.getText().toString().trim().length() == 0){
                     Toast.makeText(Registers.this, "Email required", Toast.LENGTH_SHORT).show();
-                    return;
+                    progressDoalog.dismiss();
                 }
 
                 if(etPassword.getText().toString().trim().length() == 0){
                     Toast.makeText(Registers.this, "Password required", Toast.LENGTH_SHORT).show();
-                    return;
+                    progressDoalog.dismiss();
                 }
 
                 Integer roleid = 2;
@@ -86,8 +86,8 @@ public class Registers extends AppCompatActivity {
                 call.enqueue(new Callback<RegisterModel>() {
                     @Override
                     public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
-                        Toast.makeText(Registers.this, response.body().getData().getMessage(), Toast.LENGTH_SHORT).show();
                         if (response.isSuccessful()){
+                            Toast.makeText(Registers.this, response.body().getData().getMessage(), Toast.LENGTH_SHORT).show();
                             progressDoalog.dismiss();
                             Intent redirect = new Intent(getApplicationContext(), Logins.class);
                             startActivity(redirect);

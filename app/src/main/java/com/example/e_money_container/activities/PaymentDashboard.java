@@ -36,4 +36,9 @@ public class PaymentDashboard extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void clickThirdParty(View view) {
+        Intent i = new Intent(PaymentDashboard.this, PaymentGateway2.class);
+        startActivity(i);
+    }
+
 }

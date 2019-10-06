@@ -2,6 +2,7 @@ package com.example.e_money_container.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,7 +26,7 @@ public class Logins extends AppCompatActivity {
 
     EditText etEmail, etPassword;
     Button btnLogin;
-
+    ProgressDialog progressDoalog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +50,20 @@ public class Logins extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /* INIT PROGRESS LOADER */
+                progressDoalog = new ProgressDialog(Logins.this);
+                progressDoalog.setMessage("Loading....");
+                progressDoalog.show();
+                /* END PROGRESS LOADER */
+
                 if(etEmail.getText().toString().trim().length() == 0){
                     Toast.makeText(Logins.this, "Email required", Toast.LENGTH_SHORT).show();
-                    return;
+                    progressDoalog.dismiss();
                 }
 
                 if(etPassword.getText().toString().trim().length() == 0){
                     Toast.makeText(Logins.this, "Password required", Toast.LENGTH_SHORT).show();
-                    return;
+                    progressDoalog.dismiss();
                 }
 
                 String email = etEmail.getText().toString();
@@ -76,18 +83,20 @@ public class Logins extends AppCompatActivity {
                             prefShared.setStr("accountRole", response.body().getData().getDatas().getAccountData().getAccountRole().getName());
                             prefShared.setStr("accountBalance", response.body().getData().getDatas().getAccountData().getAccountPaymentContainer().getBalance().toString());
                             prefShared.setStr("accountId", response.body().getData().getDatas().getAccountData().getId().toString());
-
+                            progressDoalog.dismiss();
                             Intent redirect = new Intent(getApplicationContext(), Dashboards.class);
                             startActivity(redirect);
                             finish();
                         }else{
                             Toast.makeText(Logins.this, "Account not found ...", Toast.LENGTH_SHORT).show();
+                            progressDoalog.dismiss();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<LoginModel> call, Throwable t) {
                         Toast.makeText(Logins.this, "Failure connection..."+ t, Toast.LENGTH_SHORT).show();
+                        progressDoalog.dismiss();
                     }
                 });
             }

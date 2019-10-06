@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.accounts.Account;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -112,6 +114,14 @@ public class Profile extends AppCompatActivity {
 
     public void clickAccountUpdate(View view) {
         Intent i = new Intent(Profile.this, AccountUpdate.class);
+        startActivity(i);
+    }
+
+    public void clickLogout(View view) {
+        SharedPreferences settings = getSharedPreferences("emoney_pref", Context.MODE_PRIVATE);
+        settings.edit().clear().commit();
+
+        Intent i = new Intent(Profile.this, Logins.class);
         startActivity(i);
     }
 }

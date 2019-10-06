@@ -74,12 +74,12 @@ public class ConfirmPayment extends AppCompatActivity {
 
                 if(etCode.getText().toString().trim().length() == 0){
                     Toast.makeText(ConfirmPayment.this, "Code required", Toast.LENGTH_SHORT).show();
-                    return;
+                    progressDoalog.dismiss();
                 }
 
                 if(etNominal.getText().toString().trim().length() == 0){
                     Toast.makeText(ConfirmPayment.this, "Nominal required", Toast.LENGTH_SHORT).show();
-                    return;
+                    progressDoalog.dismiss();
                 }
 
                 String code = etCode.getText().toString();
@@ -131,7 +131,7 @@ public class ConfirmPayment extends AppCompatActivity {
                                         });
 
                                     }else{
-                                        Toast.makeText(ConfirmPayment.this, "Payment not found " + response.body().getData().getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ConfirmPayment.this, "Payment not found ", Toast.LENGTH_SHORT).show();
                                         progressDoalog.dismiss();
                                     }
                                 }
