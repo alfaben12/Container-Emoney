@@ -64,14 +64,13 @@ public class PaymentGatewayApiAdapter extends RecyclerView.Adapter<PaymentGatewa
                 PreferenceHelper prefShared = new PreferenceHelper(context);
                 prefShared.setStr("accountFromPaymentGateway", payment_gateway);
                 String accountToPaymentGateway = prefShared.getStr("accountToPaymentGateway");
-                if (payment_gateway != accountToPaymentGateway){
+                if (payment_gateway.equals(accountToPaymentGateway)){
+                    Intent intent = new Intent(context, ConfirmPayment.class);
+                    context.startActivity(intent);
+                }else{
                     Toast.makeText(context, "Cant confirm from " + payment_gateway +" to "+ accountToPaymentGateway, Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                Intent intent = new Intent(context, ConfirmPayment.class);
-                context.startActivity(intent);
-
             }
         });
     }

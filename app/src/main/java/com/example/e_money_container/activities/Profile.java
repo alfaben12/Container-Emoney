@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 public class Profile extends AppCompatActivity {
     ProgressDialog progressDoalog;
-    TextView txtFullName, txtWalletAccount, username, name, savingBalance, savingTargetBalance, email, address, roleName, limit, containerBalance, accountCreated;
+    TextView code, txtFullName, txtWalletAccount, username, name, savingBalance, savingTargetBalance, email, address, roleName, limit, containerBalance, accountCreated;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +60,7 @@ public class Profile extends AppCompatActivity {
         limit = findViewById(R.id.limit);
         containerBalance = findViewById(R.id.containerBalance);
         accountCreated = findViewById(R.id.accountCreated);
+        code = findViewById(R.id.code);
 
         /*Create handle for the RetrofitInstance interface*/
         AccountRequest service = NodeApiClient.getRetrofitInstance().create(AccountRequest.class);
@@ -73,6 +74,7 @@ public class Profile extends AppCompatActivity {
                     prefShared.setStr("accountContainerApiKey", response.body().getData().getDatas().getAccountPaymentContainer().getPaymentGatewayAccountApikey());
                     prefShared.setStr("accountBalance", response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString());
                     username.setText(response.body().getData().getDatas().getUsername());
+                    code.setText(response.body().getData().getDatas().getCode());
                     name.setText(response.body().getData().getDatas().getFullName());
                     savingBalance.setText("Rp. "+ response.body().getData().getDatas().getBalance().toString());
                     savingTargetBalance.setText("Rp. "+ response.body().getData().getDatas().getSavingBalance().toString());

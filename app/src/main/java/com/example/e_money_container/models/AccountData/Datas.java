@@ -12,6 +12,9 @@ public class Datas {
     @SerializedName("full_name")
     @Expose
     private String fullName;
+    @SerializedName("code")
+    @Expose
+    private String code;
     @SerializedName("username")
     @Expose
     private String username;
@@ -54,6 +57,14 @@ public class Datas {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getUsername() {
