@@ -78,10 +78,16 @@ public class Logins extends AppCompatActivity {
                         if (response.isSuccessful()){
                             Toast.makeText(Logins.this, response.body().getData().getMessage(), Toast.LENGTH_SHORT).show();
                             PreferenceHelper prefShared = new PreferenceHelper(Logins.this);
+                            String balance = "";
+                            if (response.body().getData().getDatas().getAccountData().getAccountPaymentContainer() != null){
+                                balance = response.body().getData().getDatas().getAccountData().getAccountPaymentContainer().getBalance().toString();
+                            }else{
+                                balance = "";
+                            }
+                            prefShared.setStr("accountBalance", balance);
                             prefShared.setStr("accountJwtToken","Bearer "+ response.body().getData().getDatas().getJwtTokenData());
                             prefShared.setStr("accountName", response.body().getData().getDatas().getAccountData().getFullName());
                             prefShared.setStr("accountRole", response.body().getData().getDatas().getAccountData().getAccountRole().getName());
-                            prefShared.setStr("accountBalance", response.body().getData().getDatas().getAccountData().getAccountPaymentContainer().getBalance().toString());
                             prefShared.setStr("accountId", response.body().getData().getDatas().getAccountData().getId().toString());
                             progressDoalog.dismiss();
                             Intent redirect = new Intent(getApplicationContext(), Dashboards.class);

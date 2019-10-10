@@ -71,8 +71,20 @@ public class Profile extends AppCompatActivity {
                 if (response.isSuccessful()){
                     PreferenceHelper prefShared = new PreferenceHelper(Profile.this);
                     Toast.makeText(Profile.this, response.body().getData().getDatas().getFullName(), Toast.LENGTH_SHORT).show();
-                    prefShared.setStr("accountContainerApiKey", response.body().getData().getDatas().getAccountPaymentContainer().getPaymentGatewayAccountApikey());
-                    prefShared.setStr("accountBalance", response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString());
+                    String apikey = "";
+                    String balance = "";
+
+                    if (response.body().getData().getDatas().getAccountPaymentContainer() != null){
+                        apikey = response.body().getData().getDatas().getAccountPaymentContainer().getPaymentGatewayAccountApikey();
+                        balance = response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString();
+
+                    }else{
+                        apikey = "";
+                        balance = "0";
+                    }
+
+                    prefShared.setStr("accountContainerApiKey", apikey);
+                    prefShared.setStr("accountBalance", balance);
                     username.setText(response.body().getData().getDatas().getUsername());
                     code.setText(response.body().getData().getDatas().getCode());
                     name.setText(response.body().getData().getDatas().getFullName());
@@ -82,7 +94,7 @@ public class Profile extends AppCompatActivity {
                     address.setText(response.body().getData().getDatas().getAddress());
                     roleName.setText(response.body().getData().getDatas().getAccountRole().getName());
                     limit.setText("Rp. "+ response.body().getData().getDatas().getAccountRole().getTransactionLimit() + "/" + response.body().getData().getDatas().getAccountRole().getTransactionLimitCount() + "x");
-                    containerBalance.setText("Rp. "+ response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString());
+                    containerBalance.setText("Rp. "+ balance);
 
                     SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                     SimpleDateFormat output = new SimpleDateFormat("yyyy/MM/dd");

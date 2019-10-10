@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,9 @@ import com.example.e_money_container.models.Login.LoginModel;
 import com.example.e_money_container.models.Register.RegisterModel;
 import com.example.e_money_container.request.LoginRegisterRequest;
 import com.example.e_money_container.retrofit.NodeApiClient;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,26 +56,43 @@ public class Registers extends AppCompatActivity {
                 if(etName.getText().toString().trim().length() == 0){
                     Toast.makeText(Registers.this, "Name required", Toast.LENGTH_SHORT).show();
                     progressDoalog.dismiss();
+                    return;
                 }
 
                 if(etUsername.getText().toString().trim().length() == 0){
                     Toast.makeText(Registers.this, "Username required", Toast.LENGTH_SHORT).show();
                     progressDoalog.dismiss();
+                    return;
                 }
 
                 if(etAddress.getText().toString().trim().length() == 0){
                     Toast.makeText(Registers.this, "Address required", Toast.LENGTH_SHORT).show();
                     progressDoalog.dismiss();
+                    return;
                 }
 
-                if(etEmail.getText().toString().trim().length() == 0){
-                    Toast.makeText(Registers.this, "Email required", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(etEmail.getText().toString().trim())){
+                    Toast.makeText(Registers.this, "Email tidak boleh kosong!", Toast.LENGTH_LONG).show();
                     progressDoalog.dismiss();
+                    return;
+                }
+
+                if(!isValidEmail(etEmail.getText().toString().trim())) {
+                    Toast.makeText(Registers.this, "Email tidak valid!", Toast.LENGTH_LONG).show();
+                    progressDoalog.dismiss();
+                    return;
                 }
 
                 if(etPassword.getText().toString().trim().length() == 0){
                     Toast.makeText(Registers.this, "Password required", Toast.LENGTH_SHORT).show();
                     progressDoalog.dismiss();
+                    return;
+                }
+
+                if(etPassword.getText().toString().trim().length() < 8){
+                    Toast.makeText(Registers.this, "Password minimal 8 character", Toast.LENGTH_SHORT).show();
+                    progressDoalog.dismiss();
+                    return;
                 }
 
                 Integer roleid = 2;
@@ -110,5 +132,9 @@ public class Registers extends AppCompatActivity {
     public void checkSignin(View view) {
         Intent i = new Intent(Registers.this, Logins.class);
         startActivity(i);
+    }
+
+    public static boolean isValidEmail(CharSequence email) {
+        return (Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 }

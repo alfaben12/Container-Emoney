@@ -25,7 +25,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="26dp"
         android:src="@drawable/icpeople"
-        android:onClick="clickMyAccount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,12 +109,13 @@
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/parent"
                     android:layout_marginTop="@dimen/signup_text_margin_top">
+
                     <EditText
                         android:id="@+id/etNominal"
                         style="@style/modifiedEditText"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:hint="How much you saving today?"/>
+                        android:hint="How much you saving today?"
+                        android:inputType="number"
+                        android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button

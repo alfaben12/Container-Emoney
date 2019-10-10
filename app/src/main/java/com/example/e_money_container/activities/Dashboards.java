@@ -55,11 +55,23 @@ public class Dashboards extends AppCompatActivity {
             public void onResponse(Call<AccountDataModel> call, Response<AccountDataModel> response) {
                 if (response.isSuccessful()){
                     PreferenceHelper prefShared = new PreferenceHelper(Dashboards.this);
+                    String apikey = "";
+                    String balance = "";
+
+                    if (response.body().getData().getDatas().getAccountPaymentContainer() != null){
+                        apikey = response.body().getData().getDatas().getAccountPaymentContainer().getPaymentGatewayAccountApikey();
+                        balance = response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString();
+
+                    }else{
+                        apikey = "";
+                        balance = "0";
+                    }
+
                     Toast.makeText(Dashboards.this, response.body().getData().getDatas().getFullName(), Toast.LENGTH_SHORT).show();
-                    prefShared.setStr("accountContainerApiKey", response.body().getData().getDatas().getAccountPaymentContainer().getPaymentGatewayAccountApikey());
-                    prefShared.setStr("accountBalance", response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString());
+                    prefShared.setStr("accountContainerApiKey", apikey);
+                    prefShared.setStr("accountBalance", balance);
                     txtFullName.setText(response.body().getData().getDatas().getFullName());
-                    txtWalletAccount.setText("Rp. " +response.body().getData().getDatas().getAccountPaymentContainer().getBalance().toString() + " (" + response.body().getData().getDatas().getAccountRole().getName() + ")");
+                    txtWalletAccount.setText("Rp. " + balance + " (" + response.body().getData().getDatas().getAccountRole().getName() + ")");
                     progressDoalog.dismiss();
                 }else{
                     Toast.makeText(Dashboards.this, "Account not found ...", Toast.LENGTH_SHORT).show();

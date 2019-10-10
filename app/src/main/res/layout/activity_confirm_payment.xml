@@ -89,6 +89,7 @@
                                 android:id="@+id/etNominal"
                                 style="@style/modifiedEditText"
                                 android:maxLines="1"
+                                android:inputType="number"
                                 android:hint="Nominal here"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
